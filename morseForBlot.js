@@ -69,11 +69,13 @@ chars = {
 onInput("a", () => { //dot
   playTune(bip)
   currentInput = '.'
+  displayCurrentInput()
 })
 
 onInput("l", () => { //dash
   playTune(bip)
   currentInput = '-'
+  displayCurrentInput()
 })
 
 var tick = false
@@ -92,3 +94,11 @@ var tickLoop = setInterval(() => {
     playTune(bop)
   }
 }, msPerSignal / 2);
+
+function displayCurrentInput() {
+    addText(tickQueue + currentInput, { 
+        x: 0,
+        y: 0,
+        color: color`0`
+      })
+}
