@@ -18,6 +18,9 @@ const bip = tune`
 100: B5/100,
 3100`
 
+var tickQueue = ""
+var currentInput = ''
+
 
 let level = 0
 const levels = [
@@ -65,10 +68,12 @@ chars = {
 
 onInput("a", () => { //dot
   playTune(bip)
+  currentInput = '.'
 })
 
 onInput("l", () => { //dash
   playTune(bip)
+  currentInput = '-'
 })
 
 var tick = false
@@ -76,6 +81,13 @@ var tickLoop = setInterval(() => {
   tick = !tick
   if (tick) {
     playTune(bibip)
+
+    if (currentInput.length > 0) {
+      tickQueue += currentInput
+      currentInput = ""
+    }
+
+    console.log(tickQueue)
   } else {
     playTune(bop)
   }
