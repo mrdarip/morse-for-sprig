@@ -38,32 +38,32 @@ const levels = [
 setMap(levels[level])
 
 chars = {
-   ".-":"a",
-   "-...":"b",
-   "-.-.":"c",
-   "-..":"d",
-   ".":"e",
-   "..-.":"f",
-   "--.":"g",
-   "....":"h",
-   "..":"i",
-   ".---":"j",
-   "-.-":"k",
-   ".-..":"l",
-   "--":"m",
-   "-.":"n",
-   "---":"o",
-   ".--.":"p",
-   "--.-":"q",
-   ".-.":"r",
-   "...":"s",
-   "-":"t",
-   "..-":"u",
-   "...-":"v",
-   ".--":"w",
-   "-..-":"x",
-   "-.--":"y",
-   "--..":"z"
+  ".-": "a",
+  "-...": "b",
+  "-.-.": "c",
+  "-..": "d",
+  ".": "e",
+  "..-.": "f",
+  "--.": "g",
+  "....": "h",
+  "..": "i",
+  ".---": "j",
+  "-.-": "k",
+  ".-..": "l",
+  "--": "m",
+  "-.": "n",
+  "---": "o",
+  ".--.": "p",
+  "--.-": "q",
+  ".-.": "r",
+  "...": "s",
+  "-": "t",
+  "..-": "u",
+  "...-": "v",
+  ".--": "w",
+  "-..-": "x",
+  "-.--": "y",
+  "--..": "z"
 }
 
 onInput("a", () => { //dot
@@ -87,8 +87,8 @@ var tickLoop = setInterval(() => {
     if (currentInput.length > 0) {
       tickQueue += currentInput
       currentInput = ""
-    }else{
-      if(chars[tickQueue]) {
+    } else {
+      if (chars[tickQueue]) {
         console.log(chars[tickQueue])
         tickQueue = ""
       }
@@ -101,9 +101,9 @@ var tickLoop = setInterval(() => {
 }, msPerSignal / 2);
 
 function displayCurrentInput() {
-    addText(tickQueue + currentInput, { 
-        x: 0,
-        y: 0,
-        color: color`0`
-      })
+  addText(tickQueue + currentInput, {
+    x: 0,
+    y: 0,
+    color: color`0`
+  })
 }
