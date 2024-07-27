@@ -87,6 +87,11 @@ var tickLoop = setInterval(() => {
     if (currentInput.length > 0) {
       tickQueue += currentInput
       currentInput = ""
+    }else{
+      if(chars[tickQueue]) {
+        console.log(chars[tickQueue])
+        tickQueue = ""
+      }
     }
 
     console.log(tickQueue)
