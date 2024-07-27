@@ -5,7 +5,7 @@
 @addedOn: 2024-00-00
 */
 
-msPerSignal = 2000
+msPerSignal = 1500
 
 const bibip = tune`
 75: E4/75,
@@ -69,13 +69,13 @@ chars = {
 onInput("a", () => { //dot
   playTune(bip)
   currentInput = '.'
-  displayCurrentInput()
+  updateUI()
 })
 
 onInput("l", () => { //dash
   playTune(bip)
   currentInput = '-'
-  displayCurrentInput()
+  updateUI()
 })
 
 var tick = false
@@ -91,10 +91,11 @@ var tickLoop = setInterval(() => {
       if (chars[tickQueue]) {
         console.log(chars[tickQueue])
         tickQueue = ""
+        currentInput = ""
       }
     }
 
-    console.log(tickQueue)
+    updateUI()
   } else {
     playTune(bop)
   }
@@ -106,4 +107,9 @@ function displayCurrentInput() {
     y: 0,
     color: color`0`
   })
+}
+
+function updateUI() {
+  clearText()
+  displayCurrentInput()
 }
