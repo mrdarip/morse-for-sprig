@@ -80,6 +80,19 @@ onInput("l", () => {
   updateUI();
 });
 
+onInput("k", () => {
+  tickQueue = "";
+
+  updateUI()
+});
+
+onInput("j", () => {
+  inputText = inputText.substring(0, inputText.length - 1);
+
+  updateUI()
+
+});
+
 var tick = false;
 var tickLoop = setInterval(() => {
   tick = !tick;
