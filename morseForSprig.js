@@ -82,13 +82,13 @@ onInput("l", () => {
 
 onInput("k", () => {
   tickQueue = "";
-
+  playTune(bop);
   updateUI()
 });
 
 onInput("j", () => {
   inputText = inputText.substring(0, inputText.length - 1);
-
+  playTune(bop);
   updateUI()
 
 });
