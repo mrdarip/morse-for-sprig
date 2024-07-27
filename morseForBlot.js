@@ -1,9 +1,22 @@
 /*
 @title: morse writer
-@author: mrdarip
-@tags: ['tool','keyboard']
+@author: 
+@tags: []
 @addedOn: 2024-00-00
 */
+
+msPerSignal = 2000
+
+const bibip = tune`
+75: E4/75,
+75: F4/75,
+2250`
+const bop = tune`
+75: C4/75,
+2325`
+const bip = tune`
+100: B5/100,
+3100`
 
 
 let level = 0
@@ -51,9 +64,19 @@ chars = {
 }
 
 onInput("a", () => { //dot
-
+  playTune(bip)
 })
 
 onInput("l", () => { //dash
-
+  playTune(bip)
 })
+
+var tick = false
+var tickLoop = setInterval(() => {
+  tick = !tick
+  if (tick) {
+    playTune(bibip)
+  } else {
+    playTune(bop)
+  }
+}, msPerSignal / 2);
