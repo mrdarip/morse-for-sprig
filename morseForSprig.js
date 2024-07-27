@@ -22,6 +22,8 @@ var tickQueue = "";
 var currentInput = "";
 var inputText = "";
 
+var readingLine = 0
+
 const dot = "x";
 const dash = "-";
 const del = "d";
@@ -128,6 +130,15 @@ const levels = [
 ..v.......
 .x....r.-.
 .......d..`,
+  map`
+..........
+..........
+..........
+..........
+..........
+..........
+..........
+..........`,
 ];
 
 setMap(levels[level]);
@@ -229,4 +240,37 @@ function updateUI() {
   clearText();
   displayCurrentInput();
   displayInputtedText();
+}
+
+
+  onInput('w', () => {
+    if(level == 1){
+      readingLine--
+    }
+    else{
+      level = 1
+      setMap(levels[level]);
+      clearInterval(tickLoop)
+    }
+      
+    updateReadingUI()
+  })
+
+  onInput('s', () => {
+    readingLine++
+    updateReadingUI()
+  })
+
+
+function updateReadingUI() {
+  clearText()
+  let allText = inputText
+
+  for (let i = 0; i < height() * 2; i++) {
+    addText(allText.substring((i + readingLine) * (width() * 2), (i + readingLine + 1) * width() * 2), {
+      x: 0,
+      y: i,
+      color: '0'
+    })
+  }
 }
