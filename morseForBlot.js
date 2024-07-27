@@ -5,7 +5,7 @@
 @addedOn: 2024-00-00
 */
 
-msPerSignal = 1500
+msPerSignal = 1000
 
 const bibip = tune`
 75: E4/75,
@@ -96,8 +96,6 @@ var tickLoop = setInterval(() => {
     }
 
     updateUI()
-  } else {
-    playTune(bop)
   }
 }, msPerSignal / 2);
 
