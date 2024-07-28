@@ -1,5 +1,5 @@
 /*
-@title: morse writer
+@title: morse on sprig
 @author: mrdarip
 @tags: ['keyboard', 'tool']
 @addedOn: 2024-07-28
