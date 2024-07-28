@@ -308,6 +308,14 @@ function resetTickLoop() {
       if (chars[tickQueue]) {
         dequeueInput()
       }
+
+      // if tickQueue length is biggest than the  lengthiest key in characters, clear it
+      console.log(Math.max(...Object.keys(chars).map(k => k.length)))
+      console.log(tickQueue.length)
+      if (tickQueue.length > Math.max(...Object.keys(chars).map(k => k.length))) {
+        tickQueue = "";
+        updateUI()
+      }
     }
   }, msPerSignal / 2);
 
