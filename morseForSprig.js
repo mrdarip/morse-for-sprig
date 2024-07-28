@@ -299,11 +299,15 @@ function resetTickLoop() {
     if (tick && autoSend) {
       playTune(bop);
 
+      //if tickQueue is empty, and last character isn't a space, send a space
+      if (tickQueue == "" && inputText[inputText.length - 1] != " ") {
+        inputText += " ";
+        updateUI();
+      }
 
       if (chars[tickQueue]) {
         dequeueInput()
       }
-
     }
   }, msPerSignal / 2);
 
