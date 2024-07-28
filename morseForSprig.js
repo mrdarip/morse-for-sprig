@@ -355,6 +355,7 @@ function updateUI() {
   clearText();
   displayCurrentInput();
   displayInputtedText();
+  //displayAllCharacters();
 }
 
 
@@ -400,5 +401,17 @@ function updateReadingUI() {
       y: i,
       color: '0'
     })
+  }
+}
+
+function displayAllCharacters(){
+  let i = 0
+  for (let key in chars) {
+    addText( chars[key] +" "+ key , {
+      x: 0,
+      y: i*2 + 3,
+      color: '0'
+    })
+    i++
   }
 }
