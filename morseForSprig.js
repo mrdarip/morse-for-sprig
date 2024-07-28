@@ -276,31 +276,14 @@ onInput("j", () => {
   updateUI()
 });
 
-var tick = false;
-var tickLoop = setInterval(() => {
-  tick = !tick;
-  if (tick) {
-    playTune(bop);
-
-    if (currentInput.length > 0) {
-      tickQueue += currentInput;
-      currentInput = "";
-    } else {
-      if (chars[tickQueue]) {
-        inputText += chars[tickQueue]
-        tickQueue = "";
-        currentInput = "";
-      }
-    }
-
-    updateUI();
-  }
-}, msPerSignal / 2);
+var tick;
+var tickLoop
+resetTickLoop()
 
 function resetTickLoop() {
   clearInterval(tickLoop)
 
-  var tick = false;
+  tick = false;
   tickLoop = setInterval(() => {
     tick = !tick;
     if (tick) {
