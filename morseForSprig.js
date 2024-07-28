@@ -14,9 +14,14 @@ const bibip = tune`
 const bop = tune`
 75: C4/75,
 2325`;
-const bip = tune`
-100: B5/100,
-3100`;
+const pip = tune`
+50: B5/50,
+1550`;
+const pipi = tune`
+50: B5/50,
+50,
+50: B5/50,
+1450`;
 
 var tickQueue = "";
 var currentInput = "";
@@ -247,14 +252,14 @@ chars = {
 
 onInput("a", () => {
   //dot
-  playTune(bip);
+  playTune(pip);
   currentInput = ".";
   updateUI();
 });
 
 onInput("l", () => {
   //dash
-  playTune(bip);
+  playTune(pipi);
   currentInput = "-";
   updateUI();
 });
@@ -275,7 +280,7 @@ var tick = false;
 var tickLoop = setInterval(() => {
   tick = !tick;
   if (tick) {
-    playTune(bibip);
+    playTune(bop);
 
     if (currentInput.length > 0) {
       tickQueue += currentInput;
@@ -299,7 +304,7 @@ function resetTickLoop() {
   tickLoop = setInterval(() => {
     tick = !tick;
     if (tick) {
-      playTune(bibip);
+      playTune(bop);
 
       if (currentInput.length > 0) {
         tickQueue += currentInput;
