@@ -28,6 +28,7 @@ var currentInput = "";
 var inputText = "";
 
 var readingLine = 0
+var autoSend = true;
 
 const dot = "x";
 const dash = "-";
@@ -36,7 +37,7 @@ const ret = "r";
 const view = "v";
 const up = "U";
 const down = "D";
-const send = "s";
+const sendIcon = "s";
 const autosend = "a";
 
 // assign bitmap art to each sprite
@@ -160,7 +161,7 @@ setLegend(
 ......0000......
 ......0000......
 .......00.......`],
-  [send, bitmap`
+  [sendIcon, bitmap`
 000.00.0..0.00..
 0...0..00.0.0.0.
 000.00.0.00.0.0.
@@ -205,9 +206,9 @@ const levels = [
 ..........
 ..........
 ..........
-..U.......
+..U....a..
 .x.v..r.-.
-..D....d..`,
+..D....s..`,
   map`
 ..........
 ..........
@@ -254,6 +255,9 @@ onInput("a", () => {
   //dot
   playTune(pip);
   currentInput = ".";
+  if (!autoSend) {
+    enqueueInput()
+  }
   updateUI();
 });
 
@@ -261,13 +265,20 @@ onInput("l", () => {
   //dash
   playTune(pipi);
   currentInput = "-";
+  if (!autoSend) {
+    enqueueInput()
+    console.log("auto send")
+  }
   updateUI();
 });
 
 onInput("k", () => {
-  tickQueue = "";
-  playTune(bop);
-  updateUI()
+  if (chars[tickQueue]) {
+    dequeueInput()
+  }
+});
+onInput("i", () => {
+  autoSend = !autosend
 });
 
 onInput("j", () => {
@@ -286,24 +297,35 @@ function resetTickLoop() {
   tick = false;
   tickLoop = setInterval(() => {
     tick = !tick;
-    if (tick) {
+    if (tick && autoSend) {
       playTune(bop);
 
       if (currentInput.length > 0) {
-        tickQueue += currentInput;
-        currentInput = "";
+        enqueueInput()
       } else {
         if (chars[tickQueue]) {
-          inputText += chars[tickQueue]
-          tickQueue = "";
-          currentInput = "";
+          dequeueInput()
         }
       }
 
-      updateUI();
+
     }
   }, msPerSignal / 2);
 
+}
+
+function enqueueInput() {
+  tickQueue += currentInput;
+  currentInput = "";
+  updateUI();
+}
+
+function dequeueInput() {
+  inputText += chars[tickQueue]
+  tickQueue = "";
+  currentInput = "";
+
+  updateUI();
 }
 
 function displayCurrentInput() {
