@@ -255,9 +255,9 @@ onInput("a", () => {
   //dot
   playTune(pip);
   currentInput = ".";
-  if (!autoSend) {
-    enqueueInput()
-  }
+  enqueueInput()
+
+  resetTickLoop()
   updateUI();
 });
 
@@ -265,10 +265,9 @@ onInput("l", () => {
   //dash
   playTune(pipi);
   currentInput = "-";
-  if (!autoSend) {
-    enqueueInput()
-    console.log("auto send")
-  }
+  enqueueInput()
+
+  resetTickLoop()
   updateUI();
 });
 
@@ -300,14 +299,10 @@ function resetTickLoop() {
     if (tick && autoSend) {
       playTune(bop);
 
-      if (currentInput.length > 0) {
-        enqueueInput()
-      } else {
-        if (chars[tickQueue]) {
-          dequeueInput()
-        }
-      }
 
+      if (chars[tickQueue]) {
+        dequeueInput()
+      }
 
     }
   }, msPerSignal / 2);
