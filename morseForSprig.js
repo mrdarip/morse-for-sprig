@@ -311,11 +311,13 @@ function resetTickLoop() {
 
       //if tickQueue is empty, and last character isn't a space, send a space
       if (tickQueue == "" && inputText[inputText.length - 1] != " ") {
+        playTune(bibip);
         inputText += " ";
         updateUI();
       }
 
       if (chars[tickQueue]) {
+        playTune(bibip);
         dequeueInput()
       }
 
@@ -323,6 +325,7 @@ function resetTickLoop() {
       console.log(Math.max(...Object.keys(chars).map(k => k.length)))
       console.log(tickQueue.length)
       if (tickQueue.length > Math.max(...Object.keys(chars).map(k => k.length))) {
+        playTune(bop);
         tickQueue = "";
         updateUI()
       }
@@ -414,12 +417,12 @@ function updateReadingUI() {
   }
 }
 
-function displayAllCharacters(){
+function displayAllCharacters() {
   let i = 0
   for (let key in chars) {
-    addText( chars[key] +" "+ key , {
+    addText(chars[key] + " " + key, {
       x: 0,
-      y: i*2 + 3,
+      y: i * 2 + 3,
       color: '0'
     })
     i++
