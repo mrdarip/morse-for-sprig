@@ -1,8 +1,8 @@
 /*
 @title: morse writer
-@author: 
-@tags: []
-@addedOn: 2024-00-00
+@author: mrdarip
+@tags: ['keyboard', 'tool']
+@addedOn: 2024-07-28
 */
 
 var msPerSignal = 1000;
