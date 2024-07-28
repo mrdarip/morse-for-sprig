@@ -5,7 +5,7 @@
 @addedOn: 2024-00-00
 */
 
-msPerSignal = 1000;
+var msPerSignal = 1000;
 
 const bibip = tune`
 75: E4/75,
@@ -292,6 +292,32 @@ var tickLoop = setInterval(() => {
   }
 }, msPerSignal / 2);
 
+function resetTickLoop() {
+  clearInterval(tickLoop)
+
+  var tick = false;
+  tickLoop = setInterval(() => {
+    tick = !tick;
+    if (tick) {
+      playTune(bibip);
+
+      if (currentInput.length > 0) {
+        tickQueue += currentInput;
+        currentInput = "";
+      } else {
+        if (chars[tickQueue]) {
+          inputText += chars[tickQueue]
+          tickQueue = "";
+          currentInput = "";
+        }
+      }
+
+      updateUI();
+    }
+  }, msPerSignal / 2);
+
+}
+
 function displayCurrentInput() {
   addText(tickQueue + currentInput, {
     x: 0,
@@ -326,13 +352,24 @@ onInput('d', () => {
 
 
 onInput('w', () => {
-  readingLine--
-  updateReadingUI()
+  if (level == 1) {
+
+    readingLine--
+    updateReadingUI()
+  } else {
+    msPerSignal -= 50
+    resetTickLoop()
+  }
 })
 
 onInput('s', () => {
-  readingLine++
-  updateReadingUI()
+  if (level == 1) {
+    readingLine++
+    updateReadingUI()
+  } else {
+    msPerSignal += 50
+    resetTickLoop()
+  }
 })
 
 
